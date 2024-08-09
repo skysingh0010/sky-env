@@ -33,11 +33,11 @@ jobs:
           --health-cmd "mysqladmin ping"
           --health-interval 10s
           --health-timeout 5s
-          --health-retires 5
+          --health-retries 5
   
     steps:
       - name:  Show Docker containers
-        run: docker ps-a
+        run: docker ps -a
 
       - name: Wait for MYSQL to be ready
         run: |
