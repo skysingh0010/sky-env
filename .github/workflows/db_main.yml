@@ -50,10 +50,10 @@ jobs:
 
       - name: Create Database and Grant Full Permission to User1
         run: |
-          mysql --protocol=tcp -h localhost -P 3306 -u root -p${{ env.MYSQL_ROOT_PASSWORD }} -e"CREATE DATABASE IF NOT EXISTS ${NEW_DATABASE};"
-          mysql --protocol=tcp -h localhost -P 3306 -u root -p${{env.MYSQL_ROOT_PASSWORD}} -e"CREATE USER IF NOT EXISTS '${{env.MYSQL_USER}}'@'%' IDENTIFIED BY'${{env.MYSQL_PASSWORD}}';"
-          mysql --protocol=tcp -h localhost -P 3306 -u root -p${{env.MYSQL_ROOT_PASSWORD}} -e"GRANT ALL PRIVELEGES ON ${env.NEW_DATABASE}.* TO '${{env.MYSQL_USER}}'@'%';FLUSH PRIVILEGES;"
-          #mysql --protocol=tcp -h localhost -P 3306 -u root -p${{ env.MYSQL_ROOT_PASSWORD }} -e "GRANT ALL PRIVILEGES ON ${{ env.NEW_DATABASE }}.* TO '${{ env.MYSQL_USER }}'@'%'; FLUSH PRIVILEGES;"
+          mysql --protocol=tcp -h localhost -P 3306 -u root -p${{ env.MYSQL_ROOT_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${env.NEW_DATABASE};"
+          mysql --protocol=tcp -h localhost -P 3306 -u root -p${{env.MYSQL_ROOT_PASSWORD}} -e "CREATE USER IF NOT EXISTS '${{env.MYSQL_USER}}'@'%' IDENTIFIED BY'${{env.MYSQL_PASSWORD}}';"
+          mysql --protocol=tcp -h localhost -P 3306 -u root -p${{env.MYSQL_ROOT_PASSWORD}} -e "GRANT ALL PRIVELEGES ON ${env.NEW_DATABASE}.* TO '${{env.MYSQL_USER}}'@'%';FLUSH PRIVILEGES;"
+          # mysql --protocol=tcp -h localhost -P 3306 -u root -p${{ env.MYSQL_ROOT_PASSWORD }} -e "GRANT ALL PRIVILEGES ON ${{ env.NEW_DATABASE }}.* TO '${{ env.MYSQL_USER }}'@'%'; FLUSH PRIVILEGES;"
       
       - name: CREATE TABLE AND INSERT DATA
         run: |
