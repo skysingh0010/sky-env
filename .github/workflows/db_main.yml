@@ -43,14 +43,14 @@ jobs:
         run: |
           echo "Waiting for MYSQL to be ready"
           for i in {1..30}; do
-            mysqladmin --protocol=tcp -h localhost -P 3306 -u root -p${{env.MYSQL_ROOT_PASSWORD}} ping &> /dev/null && break
-            echo "MYSQL is not ready yet...retrying in 2 seconds
+            mysqladmin --protocol=tcp -h localhost -P 3306 -u root -p${{ env.MYSQL_ROOT_PASSWORD }} ping &> /dev/null && break
+            echo "MYSQL is not ready yet...retrying in 2 seconds"
             sleep 2
           done
 
       - name: Create Database and Grant Full Permission to User1
         run: |
-          mysql --protocol=tcp -h localhost -P 3306 -u root -p${{env.MYSQL_ROOT_PASSWORD}} -e"CREATE DATABASE IF NOT EXISTS ${NEW_DATABASE};"
+          mysql --protocol=tcp -h localhost -P 3306 -u root -p${{ env.MYSQL_ROOT_PASSWORD }} -e"CREATE DATABASE IF NOT EXISTS ${NEW_DATABASE};"
           mysql --protocol=tcp -h localhost -P 3306 -u root -p${{env.MYSQL_ROOT_PASSWORD}} -e"CREATE USER IF NOT EXISTS '${{env.MYSQL_USER}}'@'%' IDENTIFIED BY'${{env.MYSQL_PASSWORD}}';"
           mysql --protocol=tcp -h localhost -P 3306 -u root -p${{env.MYSQL_ROOT_PASSWORD}} -e"GRANT ALL PRIVELEGES ON ${NEW_DATABASE}.* TO '${{env.MYSQL_USER}}'@'%';FLUSH PRIVILEGES;"
 
